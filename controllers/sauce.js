@@ -80,7 +80,9 @@ exports.likeSauce = (req, res, next) => {
                     const index = newValues.usersDisliked.indexOf(userId);
                     newValues.usersDisliked.splice(index, 1);
                 }
-            break;   
+            break;
+            default:
+                throw error;   
         }
         newValues.likes = newValues.usersLiked.length;
         newValues.dislikes = newValues.usersDisliked.length;
