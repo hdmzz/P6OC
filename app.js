@@ -14,17 +14,19 @@ const mongoose = require('mongoose');
 //Routes user et sauce
 const userRoutes = require('./routes/user');
 const sauceRoutes = require('./routes/sauce');
+//express session 
 
-const app = express();
 //Path pour multer
 const path = require('path');
-
+//Lancement de l'aplication
+const app = express();
 //Connection base de données
 mongoose.connect(process.env.MONGODB_PATH,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
 .then(() => console.log('Connexion à MongoDB réussie !'))
 .catch(() => console.log('Connexion à MongoDB échouée !'));
+
 //Logging de toutes les requêtes dans la console
 app.use(morgan('combined'));
 
@@ -36,9 +38,10 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
+
 //Helmet et xss-clean protection
 app.use(helmet());
-app.use(xss())
+app.use(xss());
 
 
 //Routes 
